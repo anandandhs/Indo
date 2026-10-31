@@ -1,0 +1,86 @@
+/**
+ * Photography library. Files are generated into /public/images by
+ * `npm run images` from the originals in /images-source.
+ * Source photos are from Unsplash under the Unsplash License — see IMAGE-CREDITS.md.
+ */
+
+export type Photo = {
+  name: string;
+  alt: string;
+  /** Intrinsic aspect ratio (width / height) of the source photo. */
+  ratio: number;
+};
+
+const photo = (name: string, ratio: number, alt: string): Photo => ({ name, ratio, alt });
+
+export const photos = {
+  hero: photo(
+    'hero-production-line',
+    1.5,
+    'Operatives in hairnets and overalls working along a long food production line in a large, brightly lit factory',
+  ),
+  productionWide: photo(
+    'production-line-wide',
+    1.5,
+    'Rows of workers sorting produce on parallel conveyor lines in a food processing facility',
+  ),
+  lineOperative: photo(
+    'line-operative',
+    1.51,
+    'Food production operatives in white coats, hairnets and gloves preparing products at a stainless steel workstation',
+  ),
+  qualityHands: photo(
+    'quality-hands',
+    0.66,
+    'A production worker in protective clothing holding a handful of product above a hopper during quality checks',
+  ),
+  sortingLine: photo(
+    'sorting-line',
+    1.5,
+    'Gloved hands sorting sliced golden product on a stainless steel line',
+  ),
+  packingFloor: photo(
+    'packing-floor',
+    0.67,
+    'A team of operatives seated at a long packing line in a busy production hall',
+  ),
+  pizzaDetail: photo('pizza-detail', 0.75, 'Close-up of pizza topped with tomato, cheese and basil before baking'),
+  produceLine: photo('produce-line', 1.5, 'A produce grading line with stainless steel conveyors and sorting equipment'),
+  kitchenTeam: photo(
+    'kitchen-team',
+    1.5,
+    'Two operatives working together at a large mixing vessel in a commercial food production kitchen',
+  ),
+  kitchenVats: photo(
+    'kitchen-vats',
+    1.5,
+    'A commercial food production room with mixing vats and operatives in white workwear',
+  ),
+  frozenFillets: photo('frozen-fillets', 0.56, 'Frozen fish stacked in metal storage cages in a cold store'),
+  retailProduce: photo(
+    'retail-produce-crate',
+    1.78,
+    'A supermarket colleague carrying a crate of fresh tomatoes onto the shop floor',
+  ),
+  retailCounter: photo(
+    'retail-counter',
+    1.5,
+    'Retail colleagues in hairnets serving at a fresh food counter in a supermarket',
+  ),
+  retailStocking: photo(
+    'retail-stocking',
+    0.67,
+    'A retail colleague in a hairnet replenishing fresh produce from a crate in a supermarket aisle',
+  ),
+  retailAisle: photo('retail-aisle', 0.67, 'A supermarket worker stocking produce in a busy store aisle'),
+  fishCrates: photo(
+    'fish-crates',
+    0.67,
+    'Crates of fish moving along a conveyor beside a weighing station in a seafood processing plant',
+  ),
+  fishLineTeam: photo('fish-line-team', 0.67, 'Three workers sorting fish at a processing line'),
+  fishWeighing: photo('fish-weighing', 0.73, 'A worker weighing crates of fish on a factory conveyor belt'),
+} satisfies Record<string, Photo>;
+
+export const srcSet = (p: Photo) => `/images/${p.name}-800.webp 800w, /images/${p.name}-1600.webp 1600w`;
+export const src = (p: Photo, width: 800 | 1600 = 1600) => `/images/${p.name}-${width}.webp`;

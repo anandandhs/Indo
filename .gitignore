@@ -1,0 +1,32 @@
+# Dependencies and build output
+node_modules
+dist
+dist-*
+*.tsbuildinfo
+
+# Environment (set VITE_ENQUIRY_ENDPOINT in Vercel's project settings instead)
+.env
+.env.*
+!.env.example
+
+# Vercel
+.vercel
+
+# Source assets not needed to build — the site uses the optimised copies in /public
+# (originals live locally; run `npm run images` after adding photos to images-source)
+images-source
+brand-source
+
+# Design tooling
+.impeccable
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor and OS files
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+desktop.ini
