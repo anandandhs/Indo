@@ -254,7 +254,7 @@ The system is flat. Depth comes from tonal bands (Ivory Floor, Warm Stone, Night
 
 ## Shapes
 
-Square corners throughout: buttons, inputs, cards, photographs, tags and panels all have a 0px radius. The only round forms are the circle in the Indo logo itself. Small solid squares act as the system's marks: list bullets (8px), the lime marker inside buttons (6px), label markers and the stepped progress bars in the About approach. Photographs are cropped to fixed aspect ratios (4:3, 3:4, 4:5, 21:9) and open with a horizontal clip reveal rather than a fade.
+Square corners throughout: buttons, inputs, cards, photographs, tags and panels all have a 0px radius. The only curved forms belong to the brand marks: the leaf in the Indo base logo and the circle of the favicon. Small solid squares act as the system's marks: list bullets (8px), the lime marker inside buttons (6px), label markers and the stepped progress bars in the About approach. Photographs are cropped to fixed aspect ratios (4:3, 3:4, 4:5, 21:9) and open with a horizontal clip reveal rather than a fade.
 
 ### Named Rules
 **The Square Mark Rule.** Markers, bullets and indicators are solid squares in Signal Lime or Line Green. No circles, chevrons or icon-font glyphs stand in for them.

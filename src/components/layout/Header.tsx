@@ -79,7 +79,7 @@ export function Header() {
 
       <div className="container-page flex h-[4.5rem] items-center justify-between gap-6 lg:h-20">
         <Link to="/" aria-label="Indo home" className="min-w-0">
-          <Logo on={open ? 'dark' : 'light'} className="h-9 max-w-full object-contain object-left lg:h-11" />
+          <Logo on={open ? 'dark' : 'light'} className="h-10 max-w-full object-contain object-left lg:h-12" />
         </Link>
 
         <nav aria-label="Main" className="hidden lg:block">

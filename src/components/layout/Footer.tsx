@@ -27,7 +27,7 @@ export function Footer() {
         <div className="grid gap-14 xl:grid-cols-12 xl:gap-8">
           <div className="xl:col-span-4">
             <Link to="/" aria-label="Indo home" className="inline-block">
-              <Logo on="dark" className="h-14" />
+              <Logo on="dark" className="h-16" />
             </Link>
             <p className="mt-6 max-w-[34ch] text-on-dark-muted">
               Workforce procurement and management for food production and retail businesses across the UK.

@@ -1,15 +1,15 @@
 /**
- * Indo logo (icon + wordmark lockup) from the supplied brand logoset.
- * Use `on="dark"` on midnight backgrounds for the white-wordmark version.
- * Source files: /brand-source; served copies: /public/brand.
+ * Indo base logo (wordmark with the lime leaf) from the supplied brand logoset.
+ * Use `on="dark"` on dark green backgrounds for the white-wordmark version.
+ * Source files: /brand-source (kept locally); served copies: /public/brand.
  */
 const files = {
-  light: '/brand/indo-logo-on-light.svg',
-  dark: '/brand/indo-logo-on-dark.svg',
+  light: '/brand/indo-logo-base-on-light.svg',
+  dark: '/brand/indo-logo-base-on-dark.svg',
 };
 
-/** Intrinsic ratio of the lockup artwork (505.74 × 167.86). */
-const RATIO = 505.74 / 167.86;
+/** Intrinsic ratio of the base logo artwork (352.01 × 147.28). */
+const RATIO = 352.01 / 147.28;
 
 export function Logo({ on = 'light', className = 'h-10' }: { on?: 'light' | 'dark'; className?: string }) {
   return (
