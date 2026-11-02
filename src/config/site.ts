@@ -8,13 +8,18 @@
  */
 
 export const site = {
-  name: 'Indo',
+  name: 'INDO',
   tagline: 'People Powering Business',
+  /** Central positioning line, used in the footer and metadata. */
+  positioning: 'Frozen Food Workforce Solutions & Industry Expertise',
   description:
-    'Indo is a UK workforce partner that sources, supplies and manages dependable labour for food manufacturing, frozen food production and retail businesses.',
+    'INDO provides specialist workforce procurement and management for frozen food manufacturing, food production, packing, warehousing and logistics operations across the UK.',
 
-  /** Public URL once the site is live — used for metadata. TO CONFIRM */
-  url: null as string | null,
+  /**
+   * Public URL, used for canonical links, og:url, absolute share images and the sitemap.
+   * Comes from VITE_SITE_URL, or automatically from Vercel's production domain (vite.config.ts).
+   */
+  url: ((import.meta.env.VITE_SITE_URL as string | undefined) || null) as string | null,
 
   facts: {
     /** Confirmed by Indo. */
@@ -24,11 +29,16 @@ export const site = {
   },
 
   contact: {
-    /** TO CONFIRM — shown only once supplied. */
+    /** Email and hours: TO CONFIRM — each is shown only once supplied. */
     email: null as string | null,
-    phone: null as string | null,
-    address: null as string[] | null,
+    phone: '07424 907169' as string | null,
+    address: ['17 Bergamot Place', 'Oxford', 'OX4 7GL'] as string[] | null,
     hours: null as string | null,
+    /**
+     * Response time INDO commits to for urgent cover requests, e.g. "the same working day".
+     * TO CONFIRM — while null, the urgent-cover form makes no promise.
+     */
+    urgentResponseTime: null as string | null,
   },
 
   /**
@@ -58,18 +68,16 @@ export const site = {
   },
 };
 
+/**
+ * Main navigation. Route paths are unchanged from the original site so existing links keep
+ * working; only the labels reflect the updated positioning.
+ */
 export const nav = [
   { label: 'Home', to: '/' },
-  { label: 'About Indo', to: '/about' },
-  { label: 'What We Do', to: '/what-we-do' },
-  { label: 'Industries', to: '/industries' },
+  { label: 'About', to: '/about' },
+  { label: 'Our Expertise', to: '/industries' },
+  { label: 'Workforce Solutions', to: '/what-we-do' },
   { label: 'Contact', to: '/contact' },
 ];
 
-export const primaryCta = { label: 'Discuss Your Workforce Needs', to: '/contact' };
-
-/** Text used when the number of years is not yet confirmed. */
-export function yearsLabel() {
-  const years = site.facts.yearsOfExperience;
-  return years ? `${years}+ years` : 'Years';
-}
+export const primaryCta = { label: 'Discuss Your Workforce Needs', to: '/contact#enquiry' };

@@ -1,13 +1,14 @@
 import { Link, useParams } from 'react-router-dom';
+import { primaryCta } from '../config/site';
 import { industries, industryBySlug } from '../data/industries';
-import { services } from '../data/services';
+import { capabilities, solutions } from '../data/workforce';
 import { Button } from '../components/ui/Button';
 import { Img } from '../components/ui/Img';
 import { Reveal } from '../components/ui/Reveal';
 import { Seo } from '../components/ui/Seo';
 import { CtaSection } from '../components/sections/CtaSection';
 import { PageHero } from '../components/sections/PageHero';
-import { ServiceIcon } from '../components/sections/ServiceIcon';
+import { ProductGallery } from '../components/sections/ProductGallery';
 import { NotFound } from './NotFound';
 
 export function IndustryDetail() {
@@ -16,6 +17,7 @@ export function IndustryDetail() {
   if (!industry) return <NotFound />;
 
   const others = industries.filter((i) => i.slug !== industry.slug);
+  const related = capabilities.filter((c) => industry.capabilities.includes(c.id));
   const isFrozen = industry.slug === 'frozen-food-production';
 
   return (
@@ -23,13 +25,13 @@ export function IndustryDetail() {
       <Seo title={industry.seoTitle} description={industry.seoDescription} path={`/industries/${industry.slug}`} />
 
       <PageHero
-        breadcrumb={[{ label: 'Industries', to: '/industries' }, { label: industry.title }]}
+        breadcrumb={[{ label: 'Our Expertise', to: '/industries' }, { label: industry.title }]}
         title={industry.headline}
         intro={industry.intro}
         photo={industry.gallery[0]}
       >
         <div className="mt-8">
-          <Button to="/contact">Discuss Your Workforce Needs</Button>
+          <Button to="/contact#enquiry">{primaryCta.label}</Button>
         </div>
       </PageHero>
 
@@ -82,36 +84,63 @@ export function IndustryDetail() {
         </div>
       </section>
 
-      {/* Services in this industry */}
-      <section aria-labelledby="services-title" className="section-standard">
+      {isFrozen && (
+        <section aria-labelledby="products-title" className="section-standard">
+          <div className="container-page">
+            <h2 id="products-title" className="text-h2 max-w-[20ch] text-midnight">
+              Experience across frozen and processed food production
+            </h2>
+            <div className="mt-14">
+              <ProductGallery />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Workforce capabilities and arrangements for this sector */}
+      <section aria-labelledby="capabilities-title" className={`section-standard ${isFrozen ? 'border-t border-stone-2' : ''}`}>
         <div className="container-page">
-          <h2 id="services-title" className="text-h2 max-w-[20ch] text-midnight">
-            How we support {industry.title.toLowerCase()} businesses
+          <h2 id="capabilities-title" className="text-h2 max-w-[22ch] text-midnight">
+            How we support {industry.title.toLowerCase()} operations
           </h2>
-          {/* A compact linked list: the full service cards live on Home and What We Do. */}
+          {/* A compact linked list: full detail lives on Workforce Solutions. */}
           <ul className="mt-12 border-t border-stone-2">
-            {services.map((s) => (
-              <li key={s.id} className="border-b border-stone-2">
+            {related.map((c) => (
+              <li key={c.id} className="border-b border-stone-2">
                 <Link
-                  to={`/what-we-do#${s.id}`}
+                  to={`/what-we-do#capability-${c.id}`}
                   className="group grid gap-x-8 gap-y-2 py-6 transition-colors duration-300 hover:bg-paper md:grid-cols-12 md:items-center md:px-4 lg:py-7"
                 >
                   <span className="flex items-center gap-4 md:col-span-5">
-                    <ServiceIcon id={s.id} className="size-8 shrink-0 text-midnight" />
-                    <span className="min-w-0 text-title-s text-midnight">{s.title}</span>
+                    <span aria-hidden="true" className="size-2.5 shrink-0 bg-lime" />
+                    <span className="min-w-0 text-title-s text-midnight">{c.title}</span>
                   </span>
-                  <span className="text-small text-ink-soft md:col-span-5">{s.summary}</span>
+                  <span className="text-small text-ink-soft md:col-span-5">{c.roles.join(' · ')}</span>
                   <span className="text-label text-forest underline decoration-forest/30 decoration-2 underline-offset-[6px] transition-[text-decoration-color] group-hover:decoration-forest md:col-span-2 md:justify-self-end">
-                    How It Works
+                    Role Details
                   </span>
                 </Link>
               </li>
             ))}
           </ul>
 
-          <nav aria-label="Other industries" className="mt-20 border-t border-stone-2 pt-10">
-            <p className="text-label text-ink-soft">Other industries</p>
-            <ul className="mt-4 flex flex-col gap-2 sm:flex-row sm:gap-10">
+          <h3 className="mt-16 text-title-s text-midnight">Available as</h3>
+          <ul className="mt-5 flex flex-wrap gap-3">
+            {solutions.map((s) => (
+              <li key={s.id}>
+                <Link
+                  to={`/what-we-do#solution-${s.id}`}
+                  className="inline-flex min-h-11 items-center border border-ink/25 px-4 py-2 text-label text-ink transition-colors duration-300 hover:border-ink hover:bg-ink hover:text-ivory"
+                >
+                  {s.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <nav aria-label="Other sectors" className="mt-20 border-t border-stone-2 pt-10">
+            <p className="text-label text-ink-soft">Other sectors</p>
+            <ul className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-10">
               {others.map((o) => (
                 <li key={o.slug}>
                   <Link
@@ -130,6 +159,7 @@ export function IndustryDetail() {
       <CtaSection
         title={`Let’s talk about your ${industry.title.toLowerCase()} workforce.`}
         body="Tell us about your operation and the people you need. We will start by understanding your requirements."
+        secondary={{ label: 'Explore Workforce Solutions', to: '/what-we-do' }}
         photo={industry.ctaPhoto}
       />
     </>

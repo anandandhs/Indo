@@ -1,204 +1,190 @@
 import { site } from '../config/site';
-import { photos } from '../data/images';
-import { industries } from '../data/industries';
-import { services } from '../data/services';
+import { reasons } from '../data/workforce';
 import { Button, TextLink } from '../components/ui/Button';
 import { ClientLogo } from '../components/ui/ClientLogo';
-import { Img } from '../components/ui/Img';
-import { Reveal } from '../components/ui/Reveal';
 import { Seo } from '../components/ui/Seo';
+import { CapabilityPanels } from '../components/sections/CapabilityPanels';
 import { CtaSection } from '../components/sections/CtaSection';
 import { HomeHero } from '../components/sections/HomeHero';
-import { IndustryCard } from '../components/sections/IndustryCard';
-import { ServiceCard } from '../components/sections/ServiceCard';
-import { Stats } from '../components/sections/Stats';
+import { OperationFlow } from '../components/sections/OperationFlow';
+import { ProductGallery } from '../components/sections/ProductGallery';
+import { SolutionModules } from '../components/sections/SolutionModules';
 
-const reasons = [
-  {
-    title: 'Industry experience',
-    body: 'Years of experience working with food production and retail businesses, including specialist frozen food manufacturing.',
-  },
-  {
-    title: 'A practical approach',
-    body: 'We start from the actual workforce requirements of your operation — the lines, the shifts, the store rota.',
-  },
-  {
-    title: 'People-focused',
-    body: 'Dependable teams are central to successful operations, so we treat the people we supply as the core of the service.',
-  },
-  {
-    title: 'A workforce partner',
-    body: 'Professional, long-term client relationships built through sourcing and ongoing workforce management.',
-  },
-];
+/**
+ * Home is kept to six sections: what INDO does, for whom, how, and why — then the enquiry.
+ * Recruitment criteria, onboarding support, compliance and the recruitment journey live on About;
+ * capacity scenarios live on What We Do.
+ */
 
+/** Client sectors confirmed in INDO's existing approved content. */
 const relationshipTypes = ['Frozen food manufacturers', 'Food production businesses', 'Retail operators'];
 
-export function Home() {
-  const [food, frozen, retail] = industries;
+/**
+ * Reasons that add something new on Home. Flexibility and scalability are already shown by the
+ * workforce solutions above, and "Client partnership" is this section's own subject.
+ */
+const homeReasons = reasons.filter((r) =>
+  ['Experience', 'Operational understanding', 'Compliance focus', 'Partnership approach'].includes(r.title),
+);
 
+export function Home() {
   return (
     <>
       <Seo
-        title="Indo | Workforce Procurement & Management for Food and Retail"
-        description="Indo is a UK workforce partner that sources, supplies and manages dependable labour for food manufacturing, frozen food production and retail businesses."
+        title="INDO | Frozen Food Workforce Solutions & Labour Supply UK"
+        description={site.description}
         path="/"
       />
 
       <HomeHero />
-      <Stats />
 
-      {/* Introduction */}
-      <section aria-labelledby="intro-title" className="section-standard">
-        <div className="container-page grid gap-14 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-5 lg:pt-6">
-            <h2 id="intro-title" className="text-h2 max-w-[14ch] text-midnight">
-              More than manpower. A workforce partner.
-            </h2>
-            <p className="text-lead mt-8 text-ink-soft">
-              Every operation has its own workforce demands. From food production lines to fast-moving retail
-              environments, having the right people in the right roles makes a difference.
-            </p>
-            <p className="mt-5 text-ink-soft">
-              Indo combines industry experience with a practical understanding of workforce procurement and management
-              to support the businesses we work with.
-            </p>
-            <div className="mt-10">
-              <Button to="/about" variant="secondary">
-                Discover Indo
-              </Button>
-            </div>
-          </div>
-
-          <div className="relative lg:col-span-6 lg:col-start-7">
-            <Reveal className="aspect-[4/5] overflow-hidden sm:aspect-[5/4] lg:aspect-[4/5]">
-              <Img photo={photos.lineOperative} sizes="(min-width: 1024px) 45vw, 100vw" position="62% center" />
-            </Reveal>
-            <Reveal className="absolute -bottom-10 -left-4 hidden aspect-square w-[38%] overflow-hidden border-8 border-ivory sm:block lg:-left-24">
-              <Img photo={photos.qualityHands} sizes="20vw" position="center 30%" />
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* What we do */}
-      <section aria-labelledby="services-title" className="section-standard bg-stone">
+      {/* Experience and expertise */}
+      <section aria-labelledby="expertise-title" className="section-generous">
         <div className="container-page">
-          <div className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-12">
-            <h2 id="services-title" className="text-h2 max-w-[18ch] text-midnight lg:col-span-7">
-              From finding the right people to keeping them working well.
-            </h2>
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-12">
+            <div className="lg:col-span-7">
+              <h2 id="expertise-title" className="text-h1 max-w-[17ch] text-midnight">
+                Specialist workforce expertise. Built around food manufacturing.
+              </h2>
+            </div>
             <div className="lg:col-span-5">
               <p className="text-lead text-ink-soft">
-                Four connected areas of support, shaped around how food production and retail operations really run.
+                Frozen food manufacturing requires dependable people, consistent staffing and an understanding of
+                demanding production environments. INDO brings experience in sourcing, recruiting and managing
+                workforces for businesses producing frozen and processed food products.
               </p>
-              <Button to="/what-we-do" className="mt-8">
-                Explore Our Services
-              </Button>
             </div>
           </div>
 
-          <ul className="mt-14 grid gap-px bg-stone-2 sm:grid-cols-2">
-            {services.map((s) => (
-              <li key={s.id}>
-                <ServiceCard service={s} />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Industries */}
-      <section aria-labelledby="industries-title" className="section-generous">
-        <div className="container-page">
-          <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
-            <h2 id="industries-title" className="text-h2 text-midnight lg:col-span-6">
-              Industries we serve
-            </h2>
-            <p className="text-lead text-ink-soft lg:col-span-5 lg:col-start-8">
-              We specialise in operationally demanding sectors where workforce availability directly affects output and
-              service.
-            </p>
+          <div className="mt-16 lg:mt-20">
+            <ProductGallery />
           </div>
 
-          <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-            <li>
-              <IndustryCard industry={food} />
-            </li>
-            <li className="lg:mt-20">
-              <IndustryCard industry={frozen} tag="Our specialism" />
-            </li>
-            <li className="sm:col-span-2 lg:col-span-1">
-              <IndustryCard industry={retail} className="sm:aspect-[16/9] lg:aspect-[3/4]" />
-            </li>
-          </ul>
-
-          <div className="mt-12 lg:-mt-6">
-            <TextLink to="/industries" className="text-forest">
-              Explore Our Industries
+          <div className="mt-12 lg:mt-6">
+            <TextLink to="/industries/frozen-food-production" className="text-forest">
+              Our Frozen Food Manufacturing Expertise
             </TextLink>
           </div>
         </div>
       </section>
 
-      {/* Why Indo */}
-      <section aria-labelledby="why-title" className="section-standard border-t border-stone-2">
-        <div className="container-page grid gap-14 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-5">
-            <div className="lg:sticky lg:top-28">
-              <h2 id="why-title" className="text-h2 max-w-[15ch] text-midnight">
-                Experience that understands the work behind the work.
+      {/* Workforce capabilities */}
+      <section aria-labelledby="capabilities-title" className="section-standard on-dark bg-midnight text-ivory">
+        <div className="container-page">
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-12">
+            <div className="lg:col-span-7">
+              <h2 id="capabilities-title" className="text-h2 max-w-[20ch]">
+                From production floor to dispatch. We help keep operations moving.
               </h2>
-              <Reveal className="mt-10 hidden aspect-[4/3] overflow-hidden lg:block">
-                <Img photo={photos.kitchenVats} sizes="40vw" />
-              </Reveal>
             </div>
+            <p className="text-lead text-on-dark-muted lg:col-span-5">
+              Four areas of operational workforce that INDO sources, supplies and manages for food manufacturing,
+              warehouse and logistics businesses.
+            </p>
           </div>
 
-          <ul className="lg:col-span-7">
-            {reasons.map((r) => (
-              <li key={r.title} className="grid gap-4 border-t border-stone-2 py-10 first:border-t-0 first:pt-0 sm:grid-cols-[1fr_1.1fr] sm:gap-10 lg:py-12">
-                <h3 className="text-statement text-forest">
-                  {r.title}
-                </h3>
-                <p className="text-ink-soft sm:pt-2">{r.body}</p>
-              </li>
-            ))}
-          </ul>
+          <div className="mt-14">
+            <CapabilityPanels />
+          </div>
+
+          <div className="mt-12 flex flex-col gap-4 xs:flex-row xs:items-center xs:gap-8">
+            <Button to="/contact#enquiry" variant="lime">
+              Discuss Your Workforce Requirements
+            </Button>
+            <TextLink to="/what-we-do#operational-workforce" className="text-lime">
+              Operational Workforce in Detail
+            </TextLink>
+          </div>
         </div>
       </section>
 
-      {/* Client relationships */}
-      <section aria-labelledby="clients-title" className="section-standard bg-stone">
-        <div className="container-page grid gap-14 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-6">
-            <h2 id="clients-title" className="text-h2 max-w-[16ch] text-midnight">
-              Built on experience. Strengthened by partnerships.
-            </h2>
-            <p className="text-lead mt-8 max-w-[50ch] text-ink-soft">
-              Every client has different operational demands. Our experience across food production and retail has
-              helped us understand the importance of dependable workforce partnerships.
+      {/* Workforce solutions */}
+      <section aria-labelledby="solutions-title" className="section-standard bg-stone">
+        <div className="container-page">
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-12">
+            <div className="lg:col-span-7">
+              <h2 id="solutions-title" className="text-h2 max-w-[19ch] text-midnight">
+                Workforce solutions that adapt to your production demands.
+              </h2>
+            </div>
+            <p className="text-lead text-ink-soft lg:col-span-5">
+              Workforce requirements vary from one business to the next — and from one month to the next. INDO
+              provides flexible arrangements built around each client’s needs, from immediate cover to long-term
+              provision.
             </p>
           </div>
 
-          <div className="lg:col-span-5 lg:col-start-8">
-            <p className="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b border-midnight pb-6">
-              <span className="font-display text-[clamp(4rem,3rem+4vw,7rem)] font-extrabold leading-none tracking-[-0.05em] text-midnight">
+          <div className="mt-14">
+            <SolutionModules />
+          </div>
+
+          <div className="mt-12 flex flex-col gap-4 xs:flex-row xs:items-center xs:gap-8">
+            <Button to="/contact#urgent">Request Cover This Week</Button>
+            <TextLink to="/what-we-do" className="text-forest">
+              Explore Workforce Solutions
+            </TextLink>
+          </div>
+        </div>
+      </section>
+
+      {/* Understanding the manufacturing environment */}
+      <section aria-labelledby="environment-title" className="section-standard">
+        <div className="container-page">
+          <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
+            <div className="lg:col-span-7">
+              <h2 id="environment-title" className="text-h2 max-w-[19ch] text-midnight">
+                We understand what keeps a production environment running.
+              </h2>
+            </div>
+            <p className="text-lead text-ink-soft lg:col-span-5 lg:pt-12">
+              Food manufacturing is a demanding, highly structured environment where workforce availability,
+              productivity, quality and consistency all play an important role.
+            </p>
+          </div>
+
+          <div className="mt-16 lg:mt-20">
+            <OperationFlow />
+          </div>
+
+          <div className="mt-12">
+            <TextLink to="/about" className="text-forest">
+              How We Recruit and Manage a Workforce
+            </TextLink>
+          </div>
+        </div>
+      </section>
+
+      {/* Why INDO and client partnerships */}
+      <section aria-labelledby="why-title" className="section-standard bg-stone">
+        <div className="container-page grid gap-14 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-5">
+            <h2 id="why-title" className="text-h1 max-w-[13ch] text-midnight">
+              A workforce partner. Not just a labour supplier.
+            </h2>
+            <p className="mt-10 flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b border-midnight pb-6">
+              <span className="text-display leading-none text-midnight">
                 {site.facts.clients}
               </span>
-              <span className="max-w-[16ch] text-title-s text-midnight">
-                client relationships and counting
-              </span>
+              <span className="max-w-[16ch] text-title-s text-midnight">client relationships and counting</span>
             </p>
             <ul className="mt-2">
               {relationshipTypes.map((t) => (
-                <li key={t} className="flex items-center gap-4 border-b border-stone-2 py-5 text-title-s text-ink">
+                <li key={t} className="flex items-center gap-4 border-b border-stone-2 py-4 text-title-s text-ink">
                   <span aria-hidden="true" className="size-2 shrink-0 bg-forest" />
                   <span className="min-w-0">{t}</span>
                 </li>
               ))}
             </ul>
           </div>
+
+          <ul className="lg:col-span-6 lg:col-start-7 lg:pt-4">
+            {homeReasons.map((r) => (
+              <li key={r.title} className="border-t border-stone-2 py-8 first:border-t-0 first:pt-0 lg:py-10">
+                <h3 className="text-statement text-forest">{r.title}</h3>
+                <p className="mt-3 text-ink-soft">{r.body}</p>
+              </li>
+            ))}
+          </ul>
 
           {site.clientLogos.length > 0 && (
             // Each tile draws its own border, so a partly filled last row leaves no empty block.

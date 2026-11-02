@@ -38,6 +38,12 @@ export function Header() {
     if (!open) return;
     const toggle = toggleRef.current;
     document.body.style.overflow = 'hidden';
+    // The page behind the open menu is out of reach for every input, including a screen reader's
+    // reading cursor, which a Tab trap alone does not stop.
+    const behind = [document.getElementById('main'), document.querySelector('body > #root footer')].filter(
+      (el): el is HTMLElement => el instanceof HTMLElement,
+    );
+    behind.forEach((el) => (el.inert = true));
     panelRef.current?.querySelector<HTMLElement>('a')?.focus();
 
     const onKey = (e: KeyboardEvent) => {
@@ -55,6 +61,7 @@ export function Header() {
     window.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = '';
+      behind.forEach((el) => (el.inert = false));
       window.removeEventListener('keydown', onKey);
       toggle?.focus();
     };
@@ -77,8 +84,8 @@ export function Header() {
         Skip to content
       </a>
 
-      <div className="container-page flex h-[4.5rem] items-center justify-between gap-6 lg:h-20">
-        <Link to="/" aria-label="Indo home" className="min-w-0">
+      <div className="@container container-page flex h-[4.5rem] items-center justify-between gap-6 lg:h-20">
+        <Link to="/" aria-label="INDO home" className="min-w-0 py-1">
           <Logo on={open ? 'dark' : 'light'} className="h-10 max-w-full object-contain object-left lg:h-12" />
         </Link>
 
@@ -117,10 +124,25 @@ export function Header() {
               {primaryCta.label}
             </Button>
           </div>
+          {/* Phones: a compact route to Contact (which opens with urgent cover). Shown only while the
+              bar has room for it in rem, so enlarged text drops it instead of overflowing the page.
+              Hidden while the menu is open, since the menu carries its own full-width button. */}
+          {/* The breakpoint and the container query live on separate elements: on one element the
+              container-query class is emitted later in the CSS and overrides `md:hidden`. */}
+          {!open && (
+            <div className="md:hidden">
+              <Link
+                to="/contact"
+                className="hidden min-h-11 items-center border border-transparent bg-midnight px-4 text-label text-ivory transition-colors duration-300 hover:bg-forest active:translate-y-px @min-[17.5rem]:inline-flex"
+              >
+                Enquire
+              </Link>
+            </div>
+          )}
           <button
             ref={toggleRef}
             type="button"
-            className="relative -mr-2 flex size-12 items-center justify-center lg:hidden"
+            className="js-only relative -mr-2 flex size-12 items-center justify-center lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen((v) => !v)}

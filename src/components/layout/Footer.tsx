@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
 import type { ReactNode } from 'react';
 import { nav, site } from '../../config/site';
-import { industries } from '../../data/industries';
-import { services } from '../../data/services';
-import { Placeholder } from '../ui/Placeholder';
+import { primaryIndustries } from '../../data/industries';
+import { solutions } from '../../data/workforce';
 import { Logo } from '../ui/Logo';
 
 const linkClass = 'text-on-dark-muted transition-colors duration-200 hover:text-lime';
@@ -26,13 +25,14 @@ export function Footer() {
       <div className="container-page pb-10 pt-20 lg:pt-24">
         <div className="grid gap-14 xl:grid-cols-12 xl:gap-8">
           <div className="xl:col-span-4">
-            <Link to="/" aria-label="Indo home" className="inline-block">
-              <Logo on="dark" className="h-16" />
+            <Link to="/" aria-label="INDO home" className="inline-block">
+              <Logo on="dark" className="h-16" lazy />
             </Link>
             <p className="mt-6 max-w-[34ch] text-on-dark-muted">
-              Workforce procurement and management for food production and retail businesses across the UK.
+              Workforce procurement and management for frozen food manufacturing, food production, warehousing and
+              logistics operations across the UK.
             </p>
-            <p className="mt-6 text-label text-lime">{site.tagline}.</p>
+            <p className="mt-6 text-label text-lime">{site.positioning}.</p>
           </div>
 
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 xl:col-span-8">
@@ -46,18 +46,18 @@ export function Footer() {
               ))}
             </Column>
 
-            <Column title="What we do">
-              {services.map((s) => (
+            <Column title="Workforce solutions">
+              {solutions.map((s) => (
                 <li key={s.id}>
-                  <Link to={`/what-we-do#${s.id}`} className={linkClass}>
+                  <Link to={`/what-we-do#solution-${s.id}`} className={linkClass}>
                     {s.title}
                   </Link>
                 </li>
               ))}
             </Column>
 
-            <Column title="Industries">
-              {industries.map((i) => (
+            <Column title="Our expertise">
+              {primaryIndustries.map((i) => (
                 <li key={i.slug}>
                   <Link to={`/industries/${i.slug}`} className={linkClass}>
                     {i.title}
@@ -66,27 +66,24 @@ export function Footer() {
               ))}
             </Column>
 
+            {/* Only confirmed details are shown publicly; missing ones are tracked in the README checklist. */}
             <Column title="Contact">
-              <li className="text-on-dark-muted">
-                {contact.email ? (
+              {contact.email && (
+                <li className="text-on-dark-muted">
                   <a href={`mailto:${contact.email}`} className={linkClass}>
                     {contact.email}
                   </a>
-                ) : (
-                  <Placeholder>Email to be confirmed</Placeholder>
-                )}
-              </li>
-              <li className="text-on-dark-muted">
-                {contact.phone ? (
+                </li>
+              )}
+              {contact.phone && (
+                <li className="text-on-dark-muted">
                   <a href={`tel:${contact.phone.replace(/\s/g, '')}`} className={linkClass}>
                     {contact.phone}
                   </a>
-                ) : (
-                  <Placeholder>Phone to be confirmed</Placeholder>
-                )}
-              </li>
-              <li className="text-on-dark-muted">
-                {contact.address ? (
+                </li>
+              )}
+              {contact.address && (
+                <li className="text-on-dark-muted">
                   <address className="not-italic">
                     {contact.address.map((line) => (
                       <span key={line} className="block">
@@ -94,13 +91,16 @@ export function Footer() {
                       </span>
                     ))}
                   </address>
-                ) : (
-                  <Placeholder>Address to be confirmed</Placeholder>
-                )}
+                </li>
+              )}
+              <li>
+                <Link to="/contact#urgent" className={linkClass}>
+                  Need Cover This Week?
+                </Link>
               </li>
               <li>
                 <Link to="/contact" className="font-semibold text-lime underline decoration-lime/40 underline-offset-4 hover:decoration-lime">
-                  Send an Enquiry
+                  Discuss Your Workforce Needs
                 </Link>
               </li>
             </Column>
@@ -121,7 +121,7 @@ export function Footer() {
 
         <div className="mt-16 flex flex-col gap-4 border-t border-rule-dark pt-8 text-meta text-on-dark-subtle md:flex-row md:items-center md:justify-between">
           <p>
-            © {year} {legal.companyName ?? 'Indo'}. All rights reserved.
+            © {year} {legal.companyName ?? site.name}. All rights reserved.
             {legal.companyNumber && <> Registered in England and Wales, company no. {legal.companyNumber}.</>}
           </p>
           <ul className="flex gap-6">

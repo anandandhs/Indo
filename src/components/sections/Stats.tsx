@@ -1,18 +1,18 @@
-import { site, yearsLabel } from '../../config/site';
+import { site } from '../../config/site';
 
 export type Stat = { value: string; label: string };
 
 /** Experience strip. Only confirmed figures are shown as numbers. */
 const experienceStats: Stat[] = [
-  { value: site.facts.clients, label: 'Clients supported across food production and retail' },
-  { value: yearsLabel(), label: 'Of experience procuring and managing labour' },
-  { value: 'Food & retail', label: 'Specialist workforce knowledge, including frozen food' },
-  { value: 'End-to-end', label: 'Support from sourcing through to ongoing management' },
+  { value: site.facts.clients, label: 'Client relationships built through workforce partnerships' },
+  { value: 'Frozen food', label: 'Specialist experience in frozen and processed food manufacturing' },
+  { value: 'Line to load', label: 'Production, packing, warehouse and logistics workforces' },
+  { value: 'Flexible', label: 'From immediate shift cover to ongoing workforce provision' },
 ];
 
 export function Stats({ stats = experienceStats, className = '' }: { stats?: Stat[]; className?: string }) {
   return (
-    <section aria-label="Indo at a glance" className={`on-dark bg-midnight text-ivory ${className}`}>
+    <section aria-label="INDO at a glance" className={`on-dark bg-midnight text-ivory ${className}`}>
       {/* Two-up from phone width so the strip reads as one band, four-up on desktop.
           Hairlines come from the 1px gap over the rule colour. */}
       <div className="container-page">

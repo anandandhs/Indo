@@ -20,6 +20,10 @@ The website exists to generate enquiries from businesses looking for a dependabl
 
 ## Positioning
 
+**Updated 2026-11-02 (owner brief):** INDO — Frozen Food Workforce Solutions & Industry Expertise. Primary audience is B2B decision-makers in food manufacturing, production, warehousing and logistics (factory/plant, production, operations, supply chain, warehouse, logistics, procurement and HR managers). Frozen food manufacturing leads; production & processing and warehousing & logistics follow; retail is secondary wider experience. Use "workforce" terminology rather than "labour" (labour appears only in the SEO title and the "not just a labour supplier" contrast line). Five supply arrangements: Temporary Workforce Solutions, Temporary-to-Permanent, Seasonal Workforce, Ongoing Workforce Provision, Additional Shift Cover. Four capability areas: Production & Processing, Packing & Quality, Warehouse & Logistics, Supervision & Management. The brand name is written INDO in copy.
+
+Earlier positioning, retained for context:
+
 Indo — People Powering Business.
 
 More than a staffing supplier: an experienced workforce partner that understands the operational demands of high-volume, demanding environments, where having the right people available and well managed keeps production and trading running. Built around three ideas:

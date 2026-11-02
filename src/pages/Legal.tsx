@@ -7,12 +7,12 @@ const copy = {
   privacy: {
     title: 'Privacy Policy',
     path: '/privacy-policy',
-    description: 'How Indo collects, uses and protects personal information.',
+    description: 'How INDO collects, uses and protects personal information.',
   },
   cookies: {
     title: 'Cookie Policy',
     path: '/cookie-policy',
-    description: 'How the Indo website uses cookies and similar technologies.',
+    description: 'How the INDO website uses cookies and similar technologies.',
   },
 };
 
@@ -32,7 +32,7 @@ export function Legal({ kind }: Props) {
           </h1>
           <p className="text-lead mt-6 text-ink-soft">{page.description}</p>
           <div className="mt-12 border-t border-stone-2 pt-10 text-ink-soft">
-            <Placeholder>{`${page.title} wording to be supplied by Indo`}</Placeholder>
+            <Placeholder>{`${page.title} wording to be supplied by INDO`}</Placeholder>
           </div>
         </div>
       </section>

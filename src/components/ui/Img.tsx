@@ -22,7 +22,8 @@ export function Img({ photo, sizes, className = '', priority = false, position =
       sizes={sizes}
       alt={photo.alt}
       loading={priority ? 'eager' : 'lazy'}
-      fetchPriority={priority ? 'high' : 'auto'}
+      // Offscreen photos yield bandwidth to the page's hero (its largest paint) on slow connections.
+      fetchPriority={priority ? 'high' : 'low'}
       decoding="async"
       style={{ objectPosition: position }}
       className={`size-full bg-stone-2 object-cover text-meta text-ink-soft ${className}`}

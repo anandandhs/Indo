@@ -1,12 +1,15 @@
 import { site } from '../config/site';
 import { Seo } from '../components/ui/Seo';
 import { ContactForm } from '../components/sections/ContactForm';
+import { UrgentCoverForm } from '../components/sections/UrgentCoverForm';
 
 const nextSteps = [
-  'We review your enquiry and the workforce support you have described.',
-  'A member of our team gets in touch to understand your operation in more detail.',
-  'We talk through how Indo could support your workforce requirements.',
+  'We review your enquiry and the workforce requirement you have described.',
+  'A member of our team gets in touch to understand your operation, roles and shift patterns in more detail.',
+  'We talk through a suitable workforce solution and how INDO could put it in place.',
 ];
+
+const helpfulDetails = ['Roles and approximate numbers', 'Shift patterns and site location', 'Start date and expected duration'];
 
 export function Contact() {
   const { contact } = site;
@@ -15,8 +18,8 @@ export function Contact() {
   return (
     <>
       <Seo
-        title="Contact Indo — Discuss Your Workforce Needs"
-        description="Talk to Indo about workforce procurement and management for your food production or retail business. Send us an enquiry today."
+        title="Contact INDO — Discuss Your Workforce Needs"
+        description="Tell INDO what your operation needs. Enquire about temporary, seasonal or ongoing workforce solutions for food manufacturing, warehouse and logistics operations."
         path="/contact"
       />
 
@@ -25,18 +28,40 @@ export function Contact() {
             the introduction. On desktop the form spans both rows on the right. */}
         <div className="container-page grid gap-12 lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:gap-x-12 lg:gap-y-0">
           <div className="lg:col-span-5">
-            <h1 id="page-title" className="rise text-h1 max-w-[18ch] text-midnight">
-              Let’s talk about your workforce requirements.
+            <h1 id="page-title" className="rise text-h1 max-w-[14ch] text-midnight">
+              Tell us what your operation needs.
             </h1>
             <p className="rise text-lead mt-8 max-w-[46ch] text-ink-soft" style={{ animationDelay: '120ms' }}>
-              Tell us a little about your business and the workforce support you are looking for. Our team would be
-              happy to explore how Indo can help.
+              Every business has different workforce requirements. Share some details about your operation, and our
+              team can explore a suitable workforce solution with you.
             </p>
+            <ul className="rise mt-8 space-y-2.5" style={{ animationDelay: '200ms' }} aria-label="Helpful details to include">
+              {helpfulDetails.map((d) => (
+                <li key={d} className="flex items-start gap-3 text-ink">
+                  <span aria-hidden="true" className="mt-[0.55em] size-2 shrink-0 bg-lime" />
+                  <span className="min-w-0">{d}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className="-mx-4 sm:mx-0 lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:row-start-1">
-            <div className="bg-stone p-6 sm:p-10 lg:p-12">
-              <h2 className="text-h3 text-midnight">Send an enquiry</h2>
+            {/* Short-notice route first: four fields for a manager who needs people for the coming shifts. */}
+            <section id="urgent" aria-labelledby="urgent-title" className="on-dark bg-midnight p-6 text-ivory sm:p-10 lg:p-12">
+              <h2 id="urgent-title" className="text-h3">
+                Need cover this week?
+              </h2>
+              <p className="mt-3 max-w-[52ch] text-on-dark-muted">
+                Short on people for upcoming shifts? Send the essentials and we’ll call you back
+                {site.contact.urgentResponseTime ? ` within ${site.contact.urgentResponseTime}` : ''} to arrange cover.
+              </p>
+              <div className="mt-8">
+                <UrgentCoverForm />
+              </div>
+            </section>
+
+            <div id="enquiry" className="bg-stone p-6 sm:p-10 lg:p-12">
+              <h2 className="text-h3 text-midnight">Planning ahead? Send a full workforce enquiry</h2>
               <div className="mt-6">
                 <ContactForm />
               </div>
@@ -56,11 +81,15 @@ export function Contact() {
                   </li>
                 ))}
               </ol>
+              <p className="mt-10 text-small text-ink-soft">
+                This form is for businesses enquiring about workforce solutions. INDO does not take job applications
+                through this website.
+              </p>
             </div>
 
             {hasDetails && (
               <div className="mt-12 border-t border-stone-2 pt-10">
-                <h2 className="text-title-s text-midnight">Contact Indo directly</h2>
+                <h2 className="text-title-s text-midnight">Contact INDO directly</h2>
                 <dl className="mt-6 space-y-5">
                   {contact.email && (
                     <div>

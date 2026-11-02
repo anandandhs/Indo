@@ -4,7 +4,7 @@ import { Seo } from '../components/ui/Seo';
 export function NotFound() {
   return (
     <>
-      <Seo title="Page not found" description="The page you were looking for could not be found." path="/404" />
+      <Seo title="Page not found" description="The page you were looking for could not be found." path="/404" noindex />
       <section aria-labelledby="page-title" className="py-28 lg:py-40">
         <div className="container-page">
           <h1 id="page-title" className="text-h1 max-w-[16ch] text-midnight">
@@ -16,7 +16,7 @@ export function NotFound() {
           <div className="mt-10 flex flex-col gap-3 xs:flex-row">
             <Button to="/">Back to the Homepage</Button>
             <Button to="/contact" variant="secondary">
-              Contact Indo
+              Contact INDO
             </Button>
           </div>
         </div>

@@ -39,9 +39,11 @@ export function PageHero({ title, intro, breadcrumb, photo, photoPosition, child
           </nav>
         )}
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-12">
-          <h1 id="page-title" className="rise text-h1 text-midnight lg:col-span-7" style={{ animationDelay: '80ms' }}>
-            {title}
-          </h1>
+          <div className="lg:col-span-7">
+            <h1 id="page-title" className="rise text-h1 text-midnight" style={{ animationDelay: '80ms' }}>
+              {title}
+            </h1>
+          </div>
           <div className="rise lg:col-span-5 lg:pb-2" style={{ animationDelay: '200ms' }}>
             <p className="text-lead text-ink-soft">{intro}</p>
             {children}

@@ -73,6 +73,11 @@ typography:
     fontSize: "1.0625rem"
     fontWeight: 400
     lineHeight: 1.6
+  field:
+    fontFamily: "DM Sans, DM Sans Fallback, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "1rem"
+    fontWeight: 400
+    lineHeight: "1.5rem"
   small:
     fontFamily: "DM Sans, DM Sans Fallback, ui-sans-serif, system-ui, sans-serif"
     fontSize: "0.9375rem"
@@ -147,9 +152,10 @@ components:
   input:
     backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
-    typography: "{typography.body}"
+    typography: "{typography.field}"
     rounded: "{rounded.none}"
     padding: "14px 16px"
+    height: "54px"
   kicker-tag:
     backgroundColor: "{colors.signal-lime}"
     textColor: "{colors.night-shift-green}"
@@ -192,7 +198,7 @@ A deep green and ivory palette drawn directly from the Indo logo, with a single 
 ### Neutral
 - **Ivory Floor** (ivory-floor): the page canvas and the text colour on dark surfaces.
 - **Warm Stone** (warm-stone): secondary bands (services, client relationships, alternate service sections) and the enquiry form panel.
-- **Stone Rule** (stone-rule): hairline dividers and input borders on light surfaces; also the surface behind loading photographs.
+- **Stone Rule** (stone-rule): hairline dividers on light surfaces and disabled field borders; also the surface behind loading photographs.
 - **Paper** (paper): raised surfaces only: form inputs, alert panels and hovered cards.
 - **Ink** (ink), **Ink Soft** (ink-soft), **Ink Faint** (ink-faint): primary text, secondary text, and placeholder text (placeholders sit on Paper only, 4.6:1).
 - **On-Dark Muted** (on-dark-muted), **On-Dark Subtle** (on-dark-subtle), **Rule Dark** (rule-dark): secondary text, tertiary text and outline-button borders, and hairlines on Night-Shift and Canopy surfaces.
@@ -203,6 +209,8 @@ A deep green and ivory palette drawn directly from the Indo logo, with a single 
 
 **The Solid Ink Rule.** Text on dark green uses the solid On-Dark tokens, never translucent ivory. Contrast must not depend on what sits behind the text.
 
+**The Shape-First Rule.** Data marks differ by shape before colour, because lime sits too close to Stone in lightness (1.1:1) to separate states alone. In the solution rhythm strip a covered week is a full-height bar and an empty week a low Ink Faint baseline; lime bars carry a 1px Line Green edge, and lime against Line Green (3.5:1) separates INDO cover from a move to the client's permanent team. Journey stage bars on light surfaces fill in Line Green, on dark in Signal Lime.
+
 ## Typography
 
 **Display Font:** Manrope (with a size-matched Arial fallback)
@@ -211,7 +219,7 @@ A deep green and ivory palette drawn directly from the Indo logo, with a single 
 **Character:** Manrope at 700–800 gives headlines a solid, engineered confidence; DM Sans at 400 keeps running text open and calm. Both are geometric sans faces, so the pairing's contrast comes from weight and size rather than style.
 
 ### Hierarchy
-- **Display** (800, 44px → 80px, 0.98): the home hero headline only.
+- **Display** (800, 44px → 80px, 0.98): the home hero headline, and the client-count figure ("10+") in Why INDO on Home.
 - **Headline 1** (800, 38px → 60px, 1.03): page titles and the closing call-to-action statement.
 - **Headline 2** (800, 32px → 46px, 1.07): section headings.
 - **Statement** (800, 26px → 36px, 1.08): large-type list items that carry a section: Why Indo reasons, frozen product and role lists, other-industry links.
@@ -219,16 +227,17 @@ A deep green and ivory palette drawn directly from the Indo logo, with a single 
 - **Title Small** (700, 18px → 20px, 1.3): process stages, definition terms, compact rows, form section titles.
 - **Lead** (400, 19px → 21px, 1.55): the paragraph that follows a heading.
 - **Body** (400, 17px, 1.6): running text, held to about 70 characters per line.
+- **Field** (400, 16px, 24px line): text typed into form fields. Exactly 16px so iOS does not zoom the page on focus; 54px fields come from this line plus 14px padding.
 - **Small** (400, 15px, 1.6): card summaries, captions, footer links, form notes.
 - **Label** (700 Manrope, 15px, 1.4): buttons, navigation (at 600), form labels, link calls to action.
 - **Meta** (400, 14px, 1.5): breadcrumbs, helper text, the legal line.
 - **Kicker** (700 Manrope, 13px, 1.3, sentence case): short tags that name what follows, such as "Our specialism" or "Step 2".
-- **Stat** (800, 26px → 44px, 1.0): figures in the experience band.
+- **Stat** (800, 26px → 44px, 1.0): the short values in the experience band.
 
 ### Named Rules
 **The Step Rule.** Adjacent heading roles sit about 1.3× apart (80 → 60 → 46 → 36 → 28 → 20). Never introduce a size between two roles; pick the role.
 
-**The Sentence Case Rule.** Headings and kickers are sentence case; button and link labels follow the brief's Title Case. Nothing is set in all caps.
+**The Sentence Case Rule.** Headings and kickers are sentence case; button and link labels follow the brief's Title Case. No label ever sits above a heading (removed 2026-11-02 after audit: the tracked-caps eyebrow had spread to about 25 sections and was carrying nothing the heading did not). The heading names its section; where a section is about one sector, the sector name is the heading. `<Eyebrow>` survives only to label a list that has no heading of its own, such as the product strip under the home hero and the onboarding-support panel on About: tracked capitals at Kicker size in Forest on light and Signal Lime on dark surfaces. Sections are not numbered; numbering is reserved for real sequences such as the recruitment journey and the production line.
 
 ## Layout
 
@@ -254,10 +263,12 @@ The system is flat. Depth comes from tonal bands (Ivory Floor, Warm Stone, Night
 
 ## Shapes
 
-Square corners throughout: buttons, inputs, cards, photographs, tags and panels all have a 0px radius. The only curved forms belong to the brand marks: the leaf in the Indo base logo and the circle of the favicon. Small solid squares act as the system's marks: list bullets (8px), the lime marker inside buttons (6px), label markers and the stepped progress bars in the About approach. Photographs are cropped to fixed aspect ratios (4:3, 3:4, 4:5, 21:9) and open with a horizontal clip reveal rather than a fade.
+Square corners throughout: buttons, inputs, cards, photographs, tags and panels all have a 0px radius. The only curved forms belong to the brand marks: the leaf in the Indo base logo and the circle of the favicon. Small solid squares act as the system's marks: list bullets (8px), the lime marker inside buttons (6px), label markers and the stepped stage bars of the recruitment journey. Photographs are cropped to fixed aspect ratios (4:3, 3:4, 4:5, 21:9) and open with a horizontal clip reveal rather than a fade.
 
 ### Named Rules
 **The Square Mark Rule.** Markers, bullets and indicators are solid squares in Signal Lime or Line Green. No circles, chevrons or icon-font glyphs stand in for them.
+
+**The Still Feedback Rule.** Reduced motion removes movement, not feedback: entrances become short fades in place, hover zooms and slides are dropped, transforms snap instantly, and colour, underline and focus changes keep their transitions. The operation-flow pulse is the only loop; it runs only while on screen and is hidden for reduced motion.
 
 ## Components
 
@@ -269,7 +280,7 @@ Squared, sturdy, unfussy: the controls read like industrial signage rather than 
 - **Signal:** Signal Lime fill with Night-Shift text; the call to action on dark surfaces.
 - **Secondary:** transparent with a 1px Ink border at 25%; fills with Ink on hover.
 - **Ghost on dark:** transparent with an On-Dark Subtle border; fills with Ivory on hover.
-- **Hover / Focus:** colour transitions over 300ms with an ease-out-quart curve; a 6px square marker after the label slides 4px right on hover; pressing nudges the button down 1px. Focus shows a 2px Line Green outline (Signal Lime on dark surfaces) offset by 3px.
+- **Hover / Focus:** colour transitions over 300ms with an ease-out-quart curve; a 6px square marker after the label slides 4px right on hover; pressing nudges the button down 1px. Under reduced motion the marker stays put and only colour changes animate. Focus shows a 2px Line Green outline (Signal Lime on dark surfaces) offset by 3px.
 
 ### Cards / Containers
 - **Corner Style:** square (0px).
@@ -277,23 +288,33 @@ Squared, sturdy, unfussy: the controls read like industrial signage rather than 
 - **Shadow Strategy:** none (see Elevation & Depth).
 - **Border:** grids of cards share 1px Stone Rule hairlines, drawn as the gap between tiles.
 - **Internal Padding:** 28px–32px.
-- **Service card:** a custom geometric icon, a Headline 3 title, a Small summary and a "How It Works" link; a 4px Signal Lime rule along the top grows from 18% to full width on hover.
+- **Solution module:** the five supply arrangements share one hairline grid (two wide modules over three). Each carries a Kicker horizon line, the rhythm strip, a Headline 3 title (Statement on the wide pair at desktop), a summary and a "When it fits" note; hover brightens the module to Paper. Any card on a dark band adds `on-dark` so its focus ring turns Signal Lime.
 
 ### Inputs / Fields
-- **Style:** Paper background, 1px Stone Rule border, square corners, 14px 16px padding, 16px text (never smaller, so iOS does not zoom on focus).
-- **Focus:** border turns Night-Shift Green with a 2px Line Green ring.
-- **Error:** border turns Error Red; the message appears beneath with a 6px Error Red square, and an error summary panel in Error Soft lists every problem as a link to its field.
+One shared field style (`.field`, plus `.field-dark` on Night-Shift Green) in `src/index.css` serves every input, select, date and textarea, and `.check` serves the checkbox. Decide states there, never per form.
+- **Style:** Paper background, 1px Ink Soft border (5.6:1 on Stone, so the field is findable without relying on the white fill), square corners, 14px 16px padding, 16px text on a 24px line (never smaller, so iOS does not zoom on focus); every control is 54px tall. On Night-Shift Green the border is transparent, because the white field already stands at 14.6:1.
+- **Select:** native arrow replaced by a drawn square-cap chevron 16px from the edge; the native control returns under forced colours.
+- **Empty:** a select with nothing chosen, or an empty date, shows its prompt in Ink Faint, so a skipped question never looks answered. Placeholders appear only in textareas, as examples, never as labels.
+- **Hover:** border darkens to Ink (on dark, an Ink Soft border appears).
+- **Focus:** a 2px outline 2px outside the field, Line Green on light and Signal Lime on dark, and the border turns Night-Shift Green. The same outline marks the checkbox.
+- **Error:** an Error Red border thickened with a 1px inset ring; on dark, an extra 2px Error Soft band outside it. The message sits beneath with a 6px square, and on the full enquiry an Error Soft summary lists every problem as a link. Errors use border and shadow; focus uses the outline, so neither hides the other.
+- **Disabled:** Stone fill, Stone Rule border, Ink Soft text, not-allowed cursor.
+- **Checkbox:** a 24px square with a 2px Ink Soft border; checked fills Line Green with a drawn Ivory tick. There are no radio buttons on the site.
+- **Labels:** short qualifiers sit inside the label, e.g. "Location (town, city or site)", so paired fields start level; longer guidance goes in a hint line beneath the label.
 
 ### Navigation
 - **Desktop:** Label typography at 600 in Ink Soft, Ink when active, with a 3px Signal Lime underline that scales in from the left. The primary call to action sits at the right.
 - **Header:** sticky; Ivory Floor at rest, frosted Ivory with a hairline once the page scrolls.
-- **Mobile:** a two-line toggle opens a full-height Night-Shift Green panel with Statement-sized links separated by Rule Dark hairlines, the active page in Signal Lime, and a full-width Signal button at the foot.
+- **Mobile:** a compact "Enquire" button sits beside the menu toggle while the bar has room for it in rem (it steps aside under enlarged text). The toggle opens a full-height Night-Shift Green panel with Statement-sized links separated by Rule Dark hairlines, the active page in Signal Lime, and a full-width Signal button at the foot. While the menu is open, `main` and the footer are `inert`, so neither Tab nor a screen reader's reading cursor can reach the page behind it.
 
-### Industry Card (signature)
-A tall photograph (3:4) under a Night-Shift Green gradient that rises from the bottom, with an Ivory Headline 3 title, an On-Dark Muted summary and a Signal Lime link. The photograph zooms 5% over 1.4s on hover while the text panel lifts 6px. The frozen-food card carries the Signal Lime "Our specialism" kicker tag and sits offset downward in the three-card row.
+### Urgent Cover Panel (signature)
+A Night-Shift Green panel at the top of Contact (`#urgent`) with four fields (name, number, site, what you need) and a Signal Lime submit, ahead of the full enquiry on Stone. It is the short route for managers who need people for the coming shifts; the Additional Shift Cover solution and the solutions section on Home link straight to it. On the dark panel, field errors use Error Soft text, and the field takes an Error Red border with an Error Soft band around it; lime marks focus there and is never used for errors.
+
+### Capability Panels (signature)
+Four Night-Shift Green panels on Home, one per capability area, each a photograph under a Night-Shift gradient with an Ivory Headline 3 title, an On-Dark Muted summary and the full role list, so nothing depends on hover. On desktop they sit in one row at least 40rem tall (a minimum, never a fixed height, so longer copy grows the row rather than being clipped); the panel under the pointer or holding focus widens while its photograph zooms 5% over 1.4s. Under reduced motion the width snaps and the zoom is dropped.
 
 ### Experience Band (signature)
-A Night-Shift Green band of four figures in Stat typography and Signal Lime, each over an On-Dark Muted Small label, divided by Rule Dark hairlines; four-up on desktop, two-up on phones.
+A Night-Shift Green band on About of four short values in Stat typography and Signal Lime, each over an On-Dark Muted Small label, divided by Rule Dark hairlines; four-up on desktop, two-up on phones. Only confirmed figures appear as numbers (today, "10+" clients); the other three are words ("Frozen food", "Line to load", "Flexible") until INDO confirms more.
 
 ## Do's and Don'ts
 

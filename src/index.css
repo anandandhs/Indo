@@ -1,5 +1,27 @@
 @import 'tailwindcss';
 
+/* Self-hosted variable fonts (latin subset, SIL Open Font License). Served from /fonts
+   so no visitor data goes to a third party and no extra connection is needed. */
+@font-face {
+  font-family: 'DM Sans';
+  src: url('/fonts/dm-sans-latin-variable.woff2') format('woff2');
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fonts/manrope-latin-variable.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* Size-matched fallbacks so text keeps its line breaks when the web fonts arrive.
    Ratios measured against Arial on a running-text sample: DM Sans 400 = 93.7%,
    Manrope 700 = 100.8%, Manrope 800 = 88.8%. */
@@ -148,6 +170,174 @@
 
   .on-dark :focus-visible {
     outline-color: var(--color-lime);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Form controls. One field style for both forms, so focus, hover, error,
+   empty and disabled are decided once. `.field` sits on light panels;
+   add `.field-dark` on Night-Shift Green. Errors use the border and an
+   inset ring; focus uses the outline, so the two never mask each other.
+   ------------------------------------------------------------------ */
+@layer components {
+  .field {
+    --field-ring: var(--color-forest);
+    display: block;
+    width: 100%;
+    border: 1px solid var(--color-ink-soft); /* 5.6:1 on Stone, 7.4:1 on paper */
+    border-radius: 0;
+    background-color: var(--color-paper);
+    padding: 0.875rem 1rem;
+    font: inherit;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--color-ink);
+    transition-property: border-color, box-shadow, background-color, color;
+    transition-duration: 200ms;
+  }
+  .field::placeholder {
+    color: var(--color-ink-faint);
+    opacity: 1;
+  }
+  .field:hover {
+    border-color: var(--color-ink);
+  }
+  .field:focus {
+    border-color: var(--color-midnight);
+    outline: none;
+  }
+  .field:focus-visible {
+    outline: 2px solid var(--field-ring);
+    outline-offset: 2px;
+  }
+  .field-dark {
+    --field-ring: var(--color-lime);
+    border-color: transparent; /* white field on midnight is 14.6:1 on its own */
+  }
+  .field-dark:hover {
+    border-color: var(--color-ink-soft);
+  }
+  .field[aria-invalid='true'] {
+    border-color: var(--color-error);
+    box-shadow: inset 0 0 0 1px var(--color-error);
+  }
+  /* On dark the red edge alone is 2.2:1 against midnight; a pale outer band makes it unmissable. */
+  .field-dark[aria-invalid='true'] {
+    box-shadow:
+      inset 0 0 0 1px var(--color-error),
+      0 0 0 2px var(--color-error-soft);
+  }
+  /* Nothing chosen yet: read as a prompt, not an answer. */
+  .field[data-empty] {
+    color: var(--color-ink-faint);
+  }
+  .field:disabled {
+    border-color: var(--color-stone-2);
+    background-color: var(--color-stone);
+    color: var(--color-ink-soft);
+    cursor: not-allowed;
+  }
+
+  select.field {
+    appearance: none;
+    padding-right: 2.75rem;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 9'%3E%3Cpath d='M1.5 1.5 7 7l5.5-5.5' fill='none' stroke='%230c2e27' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 0.875rem auto;
+  }
+  select.field option {
+    color: var(--color-ink);
+  }
+  input[type='date'].field::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+  }
+  textarea.field {
+    resize: vertical;
+  }
+
+  /* Square checkbox to match the squared system; the tick is drawn, not a glyph. */
+  .check {
+    appearance: none;
+    display: grid;
+    place-content: center;
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0;
+    border: 2px solid var(--color-ink-soft);
+    border-radius: 0;
+    background-color: var(--color-paper);
+    cursor: pointer;
+    transition-property: border-color, background-color, box-shadow;
+    transition-duration: 200ms;
+  }
+  .check::before {
+    content: '';
+    width: 0.75rem;
+    height: 0.4rem;
+    margin-top: -0.2rem;
+    border-bottom: 2.5px solid var(--color-ivory);
+    border-left: 2.5px solid var(--color-ivory);
+    transform: rotate(-45deg);
+    opacity: 0;
+  }
+  .check:hover {
+    border-color: var(--color-ink);
+  }
+  .check:checked {
+    border-color: var(--color-forest);
+    background-color: var(--color-forest);
+  }
+  .check:checked::before {
+    opacity: 1;
+  }
+  .check:focus-visible {
+    outline: 2px solid var(--color-forest);
+    outline-offset: 2px;
+  }
+  .check[aria-invalid='true'] {
+    border-color: var(--color-error);
+    box-shadow: 0 0 0 1px var(--color-error);
+  }
+  .check:disabled {
+    border-color: var(--color-stone-2);
+    background-color: var(--color-stone);
+    cursor: not-allowed;
+  }
+
+  @media (forced-colors: active) {
+    .check:checked {
+      background-color: Highlight;
+    }
+    .check::before {
+      border-color: HighlightText;
+    }
+    select.field {
+      appearance: auto;
+      background-image: none;
+      padding-right: 1rem;
+    }
+  }
+}
+
+/* Parts that only work with JavaScript (forms, the mobile menu toggle) and their stand-ins.
+   index.html adds `.js` before first paint, so neither state flashes. Unlayered on purpose,
+   so they beat display utilities such as `flex`. */
+html:not(.js) .js-only {
+  display: none;
+}
+.js .nojs-only {
+  display: none;
+}
+
+/* Windows High Contrast paints a solid backplate behind each line of text. With the display
+   sizes' tight leading, one line's backplate covers the descenders of the line above. */
+@media (forced-colors: active) {
+  .text-display,
+  .text-h1 {
+    line-height: 1.12;
   }
 }
 
@@ -331,8 +521,29 @@
   animation: settle 1.8s var(--ease-out-expo) 0.15s both;
 }
 
+/* Operation flow: a lime pulse travels the conveyor line, like product moving between stations. */
+@keyframes flow-x {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(600%);
+  }
+}
+
+.flow-pulse {
+  animation: flow-x 5.5s cubic-bezier(0.45, 0, 0.55, 1) infinite paused;
+}
+
+/* The pulse only runs while the line is on screen (OperationFlow sets data-in-view). */
+[data-in-view] .flow-pulse {
+  animation-play-state: running;
+}
+
 /* Scroll image reveal (applied by <Reveal />). */
-.reveal {
+/* Hidden start state applies only when JavaScript runs (html.js), so pre-rendered pages
+   still show every image if scripts fail or are disabled. */
+.js .reveal {
   clip-path: inset(12% 0 0 0);
   opacity: 0;
   transition:
@@ -340,7 +551,7 @@
     opacity 0.8s var(--ease-out-quart);
 }
 
-.reveal.is-visible {
+.js .reveal.is-visible {
   clip-path: inset(0 0 0 0);
   opacity: 1;
 }
@@ -365,18 +576,49 @@
   }
 }
 
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Reduced motion: nothing rises, wipes, zooms or slides, but state still changes visibly.
+   Entrances become short fades in place; colour, underline and focus transitions keep running;
+   transform changes (menu icon, underline scale) apply instantly instead of animating. */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .rise {
+    animation-name: fade-in;
+    animation-duration: 0.3s;
+  }
+
+  .open-x {
+    animation: fade-in 0.3s ease-out both;
+  }
+
+  .open-x img {
+    animation: none;
+  }
+
+  .js .reveal {
+    clip-path: none;
+    transition: opacity 0.3s ease-out;
+  }
+
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-delay: 0ms !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    transition-property:
+      color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, opacity, box-shadow !important;
   }
 
-  .reveal {
-    clip-path: none;
-    opacity: 1;
+  .flow-pulse {
+    display: none;
   }
 }

@@ -24,5 +24,14 @@ Originals are in `/images-source`; run `npm run images` to regenerate the WebP f
 | fish-crates | https://unsplash.com/photos/workers-process-seafood-on-a-conveyor-belt-in-a-factory-NlTmTF0vZVQ |
 | fish-line-team | https://unsplash.com/photos/three-men-sort-fish-in-a-processing-plant-YorPySI1Pgc |
 | fish-weighing | https://unsplash.com/photos/worker-weighs-fish-in-crates-on-a-factory-conveyor-belt-hVW7rxcZR0g |
+| warehouse-reach-truck | https://unsplash.com/photos/a-yellow-forklift-in-a-large-warehouse-82ZiY5pzl1c |
+| warehouse-forklift-pallets | https://unsplash.com/photos/a-forklift-driving-through-a-warehouse-filled-with-pallets-F2C_mSrb6iM |
+| supervisor-walkround | https://unsplash.com/photos/women-walking-through-warehouse-aisle-ZlOlRnWk8zU |
+| warehouse-team | https://unsplash.com/photos/workers-walking-through-warehouse-aisle-c_4eaGRDSVU |
+| potato-conveyor | https://unsplash.com/photos/potatoes-being-sorted-on-a-conveyor-belt-xAEcG3_hxpQ (Erwin Bosman) |
 
 Replace with Indo's own site photography when available — real images of Indo's teams will always be stronger.
+
+## Fonts
+
+Manrope and DM Sans are self-hosted from `public/fonts` (latin subsets of the variable fonts), both under the [SIL Open Font License 1.1](https://openfontlicense.org).
